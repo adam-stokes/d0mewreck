@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+var api = require('./routes/models.js');
 var http = require('http');
 var path = require('path');
 
@@ -32,6 +32,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/api/models', api.list);
+app.post('/api/models', api.add);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
